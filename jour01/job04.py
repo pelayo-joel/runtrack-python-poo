@@ -2,6 +2,7 @@ class Personne:
     def __init__(self, firstname:str, name:str):
         self.__firstname, self.__name = firstname, name
 
+
     #Returns a presentation of the 'Personne'
     def SePresenter(self):
         return f"Je suis {self.__name} {self.__firstname}"
