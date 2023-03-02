@@ -30,7 +30,7 @@ class Personnage:
                 "Duration":4
             }, 
             "Freeze":{
-                "Effect":2,
+                "Effect":3,
                 "Duration":2
             }, 
             "Charmed":{
@@ -134,13 +134,13 @@ class Personnage:
     
 
     def HPBar(self):
-        print(f"{self.__name} HP: [{'#' * self.__hp}{'-' * (self.__maxHP - self.__hp)}]")
+        print(f"{self.__name} HP: [{'#' * self.__hp}{'-' * (self.__maxHP - self.__hp)}] ({self.__hp})")
     
     def StaminaBar(self):
-        print(f"{self.__name} Stamina: [{'#' * self.__stamina}{'-' * (self.__maxStamina - self.__stamina)}]")
+        print(f"{self.__name} Stamina: [{'#' * self.__stamina}{'-' * (self.__maxStamina - self.__stamina)}] ({self.__stamina})")
 
     def MPBar(self):
-        print(f"{self.__name} MP: [{'#' * self.__mp}{'-' * (self.__maxMP - self.__mp)}]")
+        print(f"{self.__name} MP: [{'#' * self.__mp}{'-' * (self.__maxMP - self.__mp)}] ({self.__mp})")
 
 
 
@@ -450,11 +450,13 @@ class Jeu:
 
             self.__player.TakeAction(playerAction, self.__enemy)
             if self.__CheckDeath():
+                input("\nPress enter to continue...")
                 self.__ClearScreen()
                 return None
             
             self.__enemy.TakeAction(enemyAction, self.__player)
             if self.__CheckDeath():
+                input("\nPress enter to continue...")
                 self.__ClearScreen()
                 return None
 
@@ -481,10 +483,10 @@ class Jeu:
 
         print(" " * 64, "-" *20, " " * 64)
         print(" " * 71, "Actions", " " * 71)
-        print(f"\n{' ' * 52} 1 - Normal atk   2 - Heavy atk   3 - FireBall")
-        print(f"\n{' ' * 52} 4 - Ice Age   5 - Poison Knife   6 - Healing")
-        print(f"\n{' ' * 52} 7 - Dance   8 - Rest   9 - Concentrate")
-        print(f"\n{' ' * 65} 10 - Guard")
+        print(f"\n{' ' * 45} 1 - Normal atk (5 stm)  2 - Heavy atk (8 stm)  3 - FireBall (10 mp)")
+        print(f"\n{' ' * 45} 4 - Ice Age (10 mp)  5 - Poison Knife (9 stm)  6 - Healing (5 mp)")
+        print(f"\n{' ' * 45} 7 - Dance (8 stm, 3 mp)  8 - Rest   9 - Concentrate")
+        print(f"\n{' ' * 68} 10 - Guard")
         print("-" * 150)
         print("-" * 150, "\n")
 
@@ -492,12 +494,12 @@ class Jeu:
     def __CheckDeath(self):
         for i in range(len(self.__charList)):
             if self.__charList[i].GetHP() <= 0:
-                print(f"{self.__charList[i].GetName()} has died !")
+                print(f"\n{self.__charList[i].GetName()} has died !")
                 
                 i += 1
                 i = (i % len(self.__charList))
                 print(f"{self.__charList[i].GetName()} is victorious !")
-
+                
                 return True
             
 
