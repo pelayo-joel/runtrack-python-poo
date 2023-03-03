@@ -19,13 +19,14 @@ def GameLadies(rows:int, row:int=0, colPosTaken:list=[]):
         if colPos in posTaken:
             return RandomColPos(posTaken)
         
-        posTaken += [colPos]
+        posTaken += [colPos - 1, colPos + 1]
         return colPos, posTaken
 
 
     if row < rows:
         boardRow = [" "] * rows
         rndColPos, colPosTaken = RandomColPos()
+
         boardRow[rndColPos] = "X"
 
         print(boardRow)
